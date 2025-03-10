@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { migrate } from "drizzle-orm/neon-http/migrator";
 import { neon } from "@neondatabase/serverless";
 import { sql } from "drizzle-orm";
-import { env } from "@/config/env";
+// import { env } from "@/config/env";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function dropAllTables(db: any) {
@@ -32,7 +32,7 @@ async function dropAllTables(db: any) {
 }
 
 async function runMigrations() {
-  const sql = neon(env.DATABASE_URL);
+  const sql = neon(process.env.DATABASE_URL!);
   const db = drizzle(sql);
 
   const shouldDrop = process.argv.includes("--drop-tables");

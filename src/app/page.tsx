@@ -1,12 +1,22 @@
+import { auth } from "@/auth";
+import { SignOut } from "@/components/signout-button";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Home() {
+  const session = await auth();
   return (
-    <div className="min-h-screen bg-[#eee2fe] bg-gradient-to-b from-[#d7cfe2] to-[#ddd7e6] p-4 sm:p-8">
+    <div className="min-h-screen bg-[#080014] bg-gradient-to-b from-[#080014] to-[#0C0020] p-4 sm:p-8">
       <main className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Jobjam</h1>
-          {false ? <Button asChild>Sign In</Button> : <Button>Sign Out</Button>}
+          <h1 className="text-3xl font-bold text-white/90">Demo</h1>
+          {!session ? (
+            <Button asChild>
+              <Link href="/api/auth/signin">Sign in</Link>
+            </Button>
+          ) : (
+            <SignOut />
+          )}
         </div>
       </main>
     </div>
